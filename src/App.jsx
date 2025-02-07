@@ -1,5 +1,7 @@
 import axios from "axios";
 import "./App.css";
+import { NavLink, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
   const url =
@@ -14,10 +16,22 @@ function App() {
 
   axios
     .get(url, options)
-    .then((response) => console.log(response.data.results))
+    .then((response) => console.log(response))
     .catch((err) => console.error(err));
 
-  return;
+  return (
+    <div>
+      <nav>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/movies">Movies</NavLink>
+      </nav>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        {/* <Route path="/movies" element={<MoviesPage />} /> */}
+        {/* <Route path="*" element={<NotFoundPage />} /> */}
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

@@ -11,9 +11,6 @@ export default function HomePage() {
       setMovies(data);
     };
     getData();
-    // getTrendMovies()
-    //   .then((response) => setMovies(response))
-    //   .catch((err) => console.error(err));
   }, []);
 
   console.log(movies);

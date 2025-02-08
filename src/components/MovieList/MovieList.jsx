@@ -1,6 +1,4 @@
-// import { nanoid } from "nanoid";
 import { NavLink } from "react-router-dom";
-// import MovieDetailsPage from "../MovieDetailsPage/MovieDetailsPage";
 
 export default function MovieList({ movies }) {
   return (

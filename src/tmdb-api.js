@@ -14,7 +14,6 @@ const options = {
 
 export async function getTrendMovies() {
   const { data } = await axios.get(`${BASE_URL}${TREND_URL}`, options);
-  //   const trendMovies = response.data.results;
   console.log(data.results);
   return data.results;
 }

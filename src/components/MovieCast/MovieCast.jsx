@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getCastsById } from "../../tmdb-api";
+import { getMoviesById } from "../../tmdb-api";
 
 export default function MovieCast() {
   const { movieId } = useParams();
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [cast, setCast] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getCastsById(movieId);
-      setCast(data);
+      try {
+        const data = await getMoviesById(movieId, "credits");
+        setCast(data.credits.cast);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
     };
     getData();
   }, [movieId]);
@@ -18,12 +26,10 @@ export default function MovieCast() {
   const defaultImage =
     "https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster";
 
-  if (!cast) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <div>
+      {error && <p>ERROR</p>}
+      {loading && <p>Loading cast...</p>}
       {cast ? (
         <ul>
           {cast.map((part) => {

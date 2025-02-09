@@ -1,26 +1,32 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getReviewsById } from "../../tmdb-api";
+import { getMoviesById } from "../../tmdb-api";
 
 export default function MovieReviews() {
   const { movieId } = useParams();
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getReviewsById(movieId);
-      setReviews(data);
+      try {
+        const data = await getMoviesById(movieId, "reviews");
+        setReviews(data.reviews.results);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
     };
     getData();
   }, [movieId]);
 
-  if (!reviews) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <div>
+      {error && <p>ERROR</p>}
+      {loading && <p>Loading reviews...</p>}
       <ul>
         {reviews.length !== 0 ? (
           reviews.map((review) => {

@@ -29,7 +29,6 @@ export default function MoviesPage() {
         setLoading(true);
         setError(false);
         const data = await getSearchMovies(query, page);
-        // setMovies(data);
         setTotalPages(data.total_pages);
         if (page === 1) {
           setMovies(data.results);

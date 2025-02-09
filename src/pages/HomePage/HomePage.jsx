@@ -20,7 +20,6 @@ export default function HomePage() {
         setLoading(true);
         setError(false);
         const data = await getTrendMovies(page);
-        // setMovies(data);
         setTotalPages(data.total_pages);
         if (page === 1) {
           setMovies(data.results);
@@ -35,10 +34,6 @@ export default function HomePage() {
     };
     getData();
   }, [page]);
-
-  console.log(movies);
-  console.log(page);
-  console.log(totalPages);
 
   return (
     <div>

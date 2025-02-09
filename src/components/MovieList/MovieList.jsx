@@ -5,10 +5,6 @@ import { nanoid } from "nanoid";
 export default function MovieList({ movies }) {
   const location = useLocation();
 
-  // if (!movies || movies.length === 0) {
-  //   return <p>No movies found.</p>; // Показуємо повідомлення, якщо немає фільмів
-  // }
-
   return (
     <div>
       <ul className={css.movieList}>
@@ -22,7 +18,7 @@ export default function MovieList({ movies }) {
                   width="240"
                 />
                 <h2>{movie.title}</h2>
-                <p>Rating: {movie.vote_average}</p>
+                <p>Rating: {movie.vote_average.toFixed(1)}</p>
               </NavLink>
             </li>
           );

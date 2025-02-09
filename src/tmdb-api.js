@@ -1,48 +1,82 @@
 import axios from "axios";
 
 const BASE_URL = "https://api.themoviedb.org/3";
-const TREND_URL = "/trending/movie/day?language=en-US";
-const SEARCH_URL = "/search/movie?include_adult=false&language=en-US&page=1";
+// const TREND_URL = "/trending/movie/day?language=en-US";
+// const SEARCH_URL = "/search/movie?include_adult=false&language=en-US&page=1";
 const KEY_API =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MGZhMTY5M2I5ZDE4MmVmOGZmY2M4MTVmODA5MWQ3NSIsIm5iZiI6MTczODk0NzM2Ny4wNzEsInN1YiI6IjY3YTYzYjI3NGQ1MzZjYjkzMjY2ZWQzYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uNBU1ySOjevLflQlIWPvmHn6N4eQ6rb23DgoKO96Gio";
 
-const options = {
+const axiosOptions = axios.create({
+  baseURL: BASE_URL,
   headers: {
     Authorization: `Bearer ${KEY_API}`,
   },
-};
+});
 
-export async function getTrendMovies() {
-  const { data } = await axios.get(`${BASE_URL}${TREND_URL}`, options);
-  return data.results;
-}
-
-export async function getSearchMovies(query) {
-  const { data } = await axios.get(
-    `${BASE_URL}${SEARCH_URL}&query=${query}`,
-    options
-  );
-  return data.results;
-}
-
-export async function getMoviesById(movieId) {
-  const { data } = await axios.get(`${BASE_URL}/movie/${movieId}`, options);
-  console.log(data);
+export async function getTrendMovies(page) {
+  const { data } = await axiosOptions.get("/trending/movie/day", {
+    params: { page },
+  });
   return data;
 }
 
-export async function getReviewsById(movieId) {
-  const { data } = await axios.get(
-    `${BASE_URL}/movie/${movieId}/reviews?language=en-US&page=1`,
-    options
-  );
+export async function getSearchMovies(query, page) {
+  const { data } = await axiosOptions.get("/search/movie", {
+    params: { query, page },
+  });
+  return data;
+}
+
+export async function getMoviesById(movieId, appendResponse = "") {
+  const { data } = await axiosOptions.get(`/movie/${movieId}`, {
+    params: {
+      append_to_response: appendResponse,
+    },
+  });
+  return data;
+}
+
+export async function getReviewsById(movieId, appendResponse = "") {
+  const { data } = await axiosOptions.get(`/movie/${movieId}/reviews`, {
+    params: {
+      append_to_response: appendResponse,
+    },
+  });
   return data.results;
 }
 
-export async function getCastsById(movieId) {
-  const { data } = await axios.get(
-    `${BASE_URL}/movie/${movieId}/credits?language=en-US`,
-    options
-  );
+export async function getCastsById(movieId, appendResponse = "") {
+  const { data } = await axiosOptions.get(`/movie/${movieId}/reviews`, {
+    params: {
+      append_to_response: appendResponse,
+    },
+  });
   return data.cast;
 }
+
+// export async function getTrendMovies() {
+//   const { data } = await axios.get(`${BASE_URL}${TREND_URL}`, options);
+//   return data.results;
+// }
+
+// export async function getSearchMovies(query, page) {
+//   const { data } = await axios.get(
+//     `${BASE_URL}${SEARCH_URL}&query=${query}&page=${page}`,
+//     options
+//   );
+//   return data.results;
+// }
+
+// export async function getMoviesById(movieId) {
+//   const { data } = await axios.get(`${BASE_URL}/movie/${movieId}`, options);
+//   console.log(data);
+//   return data;
+// }
+
+// export async function getReviewsById(movieId) {
+//   const { data } = await axios.get(
+//     `${BASE_URL}/movie/${movieId}/reviews?language=en-US&page=1`,
+//     options
+//   );
+//   return data.results;
+// }

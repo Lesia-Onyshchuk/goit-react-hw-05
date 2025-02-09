@@ -1,8 +1,9 @@
 import { Field, Formik, Form } from "formik";
 
 export default function SearchBar({ handleChangeQuery }) {
-  const onSubmit = (values) => {
+  const onSubmit = (values, actions) => {
     handleChangeQuery(values.query);
+    actions.resetForm();
   };
 
   const initialValues = { query: "" };

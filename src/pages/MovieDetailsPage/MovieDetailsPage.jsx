@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import { getMoviesById } from "../../tmdb-api";
+// import css from "./MovieDetailsPage.module.css"
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
@@ -34,6 +35,7 @@ export default function MovieDetailsPage() {
             : defaultImage
         }
         alt={movie.title}
+        width="240"
       />
       <h2>{movie.title}</h2>
       <p>Rating: {movie.vote_average}</p>

@@ -18,8 +18,11 @@ export async function getTrendMovies() {
   return data.results;
 }
 
-export async function getSearchMovies() {
-  const { data } = await axios.get(`${BASE_URL}${SEARCH_URL}`, options);
+export async function getSearchMovies(query) {
+  const { data } = await axios.get(
+    `${BASE_URL}${SEARCH_URL}&query=${query}`,
+    options
+  );
   console.log(data.results);
   return data.results;
 }
@@ -47,3 +50,5 @@ export async function getCastsById(movieId) {
   console.log(data.cast);
   return data.cast;
 }
+
+console.log(getSearchMovies("enemy"));

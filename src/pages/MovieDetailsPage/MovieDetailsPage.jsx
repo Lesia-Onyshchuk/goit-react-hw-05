@@ -23,7 +23,7 @@ export default function MovieDetailsPage() {
   if (!movie) {
     return <p>Loading...</p>;
   }
-  console.log(movie);
+
   return (
     <div>
       <NavLink to={goBackUrl.current}>Go back</NavLink>

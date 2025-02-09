@@ -22,8 +22,6 @@ export default function MoviesPage() {
     getData();
   }, [query]);
 
-  console.log(movies);
-
   return (
     <div>
       <SearchBar handleChangeQuery={handleChangeQuery} />

@@ -14,7 +14,6 @@ const options = {
 
 export async function getTrendMovies() {
   const { data } = await axios.get(`${BASE_URL}${TREND_URL}`, options);
-  console.log(data.results);
   return data.results;
 }
 
@@ -23,7 +22,6 @@ export async function getSearchMovies(query) {
     `${BASE_URL}${SEARCH_URL}&query=${query}`,
     options
   );
-  console.log(data.results);
   return data.results;
 }
 
@@ -38,7 +36,6 @@ export async function getReviewsById(movieId) {
     `${BASE_URL}/movie/${movieId}/reviews?language=en-US&page=1`,
     options
   );
-  console.log(data.results);
   return data.results;
 }
 
@@ -47,8 +44,5 @@ export async function getCastsById(movieId) {
     `${BASE_URL}/movie/${movieId}/credits?language=en-US`,
     options
   );
-  console.log(data.cast);
   return data.cast;
 }
-
-console.log(getSearchMovies("enemy"));

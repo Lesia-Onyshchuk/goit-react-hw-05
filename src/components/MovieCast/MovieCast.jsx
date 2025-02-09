@@ -15,8 +15,6 @@ export default function MovieCast() {
     getData();
   }, [movieId]);
 
-  console.log(cast);
-
   const defaultImage =
     "https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster";
 

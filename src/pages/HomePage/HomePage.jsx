@@ -13,8 +13,6 @@ export default function HomePage() {
     getData();
   }, []);
 
-  console.log(movies);
-
   return (
     <div>
       <h1>Trending today</h1>

@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import { getMoviesById } from "../../tmdb-api";
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
 
   const [movie, setMovie] = useState(null);
+  const location = useLocation();
+  const goBackUrl = useRef(location.state ?? "/movies");
 
   useEffect(() => {
     const getData = async () => {
@@ -24,6 +26,7 @@ export default function MovieDetailsPage() {
   console.log(movie);
   return (
     <div>
+      <NavLink to={goBackUrl.current}>Go back</NavLink>
       <img
         src={
           movie.poster_path
